@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --text: #1d1d1f;
+  --muted: #6e6e73;
+  --border: rgba(0, 0, 0, 0.08);
+  --accent: #0071e3;
+  --ok: #15803d;
+  --warn: #b45309;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #000000;
+    --surface: #1c1c1e;
+    --text: #f5f5f7;
+    --muted: #98989d;
+    --border: rgba(255, 255, 255, 0.1);
+    --accent: #0a84ff;
+    --ok: #30d158;
+    --warn: #ffb340;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #000000;
+  --surface: #1c1c1e;
+  --text: #f5f5f7;
+  --muted: #98989d;
+  --border: rgba(255, 255, 255, 0.1);
+  --accent: #0a84ff;
+  --ok: #30d158;
+  --warn: #ffb340;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.brand { font-weight: 600; color: var(--text); text-decoration: none; font-size: 17px; }
+
+.nav { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.nav-link {
+  padding: 8px 12px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 150ms ease, color 150ms ease;
+}
+.nav-link:hover { color: var(--text); background: var(--border); }
+.nav-link:active { transform: scale(0.97); }
+
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 96px;
+  overflow-x: hidden;
+}
+
+.page-title { font-size: 28px; font-weight: 650; margin: 0 0 4px; letter-spacing: -0.01em; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.grid-stats { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 900px) { .grid-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.grid-rooms { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+
+.stat { display: flex; flex-direction: column; gap: 4px; }
+.stat-value { font-size: 24px; font-weight: 650; margin: 0; font-variant-numeric: tabular-nums; }
+
+.tone-ok { color: var(--ok); }
+.tone-warn { color: var(--warn); }
+
+.muted { color: var(--muted); }
+.small { font-size: 13px; margin: 0; }
+
+.section { margin-top: 28px; }
+.section-title { font-size: 17px; font-weight: 600; margin: 0 0 12px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+}
+.badge-empty { color: var(--muted); }
+.badge-filled { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+
+.empty {
+  text-align: center;
+  padding: 36px 20px;
+  color: var(--muted);
+}
+
+.error-box {
+  border: 1px solid var(--warn);
+  color: var(--warn);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 14px;
+}
+
+.room-card { display: flex; flex-direction: column; gap: 10px; min-height: 132px; }
+.room-head { display: flex; justify-content: space-between; align-items: center; }
+.room-number { font-size: 22px; font-weight: 650; font-variant-numeric: tabular-nums; }
